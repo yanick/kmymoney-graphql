@@ -22,7 +22,7 @@ const typeDefs = gql`
   # This "Book" type can be used in other type declarations.
   type Account {
     id: Int
-    name: String
+    fullname: String
   }
 
   # The "Query" type is the root of all GraphQL queries.

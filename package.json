@@ -15,8 +15,12 @@
     "@babel/node": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-typescript": "^7.1.0",
+    "apollo": "^2.1.8",
     "apollo-server": "^2.2.6",
+    "core-js": "^2.6.0",
     "graphql": "^14.0.2",
+    "graphql-schema-typescript": "^1.2.8",
+    "graphql-yoga": "^1.16.7",
     "lodash": "^4.17.11"
   }
 }

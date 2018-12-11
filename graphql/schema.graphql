@@ -1,0 +1,9 @@
+type Account {
+    id: String
+    fullname: String
+}
+
+type Query {
+    accounts: [Account],
+    account(id: String!): Account,
+}

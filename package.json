@@ -10,7 +10,13 @@
   "author": "Yanick Champoux <yanick@babyl.ca> (http://techblog.babyl.ca)",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/node": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-typescript": "^7.1.0",
     "apollo-server": "^2.2.6",
-    "graphql": "^14.0.2"
+    "graphql": "^14.0.2",
+    "lodash": "^4.17.11"
   }
 }

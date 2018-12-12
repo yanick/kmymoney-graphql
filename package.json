@@ -21,6 +21,9 @@
     "graphql": "^14.0.2",
     "graphql-schema-typescript": "^1.2.8",
     "graphql-yoga": "^1.16.7",
-    "lodash": "^4.17.11"
+    "knex": "^0.16.2",
+    "lodash": "^4.17.11",
+    "objection": "^1.4.0",
+    "sqlite3": "^4.0.4"
   }
 }

@@ -1,6 +1,13 @@
+type Institution {
+    name: String
+}
+
 type Account {
     id: String
-    fullname: String
+    accountName: String
+    institutionId: ID,
+    institution: Institution,
+    balance(date: String): Float
 }
 
 type Query {

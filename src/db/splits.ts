@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 
-export default class Split extends Model {
+export default class Splits extends Model {
   static get tableName() {
     return 'kmmSplits';
   }

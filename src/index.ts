@@ -3,7 +3,7 @@ import { GraphQLServer } from 'graphql-yoga';
 import { Model } from 'objection';
 import Knex  from 'knex';
 
-import resolver from './resolvers/account.ts';
+import resolver from './resolvers/index.ts';
 
 const knex = Knex({
   client: 'sqlite3',

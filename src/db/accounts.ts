@@ -7,6 +7,10 @@ export default class Accounts extends Model {
     return 'kmmAccounts';
   }
 
+  splits!: Splits;
+
+  accountTypeString!: string;
+
   static get relationMappings()  {
       return {
     institution: {

@@ -1,16 +1,24 @@
+type Category {
+    name: String,
+    root_accounts: [Account]
+}
+
 type Institution {
     name: String
 }
 
 type Account {
-    id: String
+    id: ID
     accountName: String
     institutionId: ID,
     institution: Institution,
-    balance(date: String): Float
+    balance(date: String): Float,
+    subaccounts: [Account],
 }
 
 type Query {
     accounts: [Account],
     account(id: String!): Account,
+    categories: [Category],
+    category(name: String!): Category,
 }

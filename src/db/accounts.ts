@@ -11,8 +11,17 @@ export default class Accounts extends Model {
 
   accountTypeString!: string;
 
+
   static get relationMappings()  {
       return {
+    parentAccount: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: Accounts,
+      join: {
+        from: 'kmmAccounts.parentId',
+        to: 'kmmAccounts.id'
+      }
+    },
     institution: {
       relation: Model.BelongsToOneRelation,
       modelClass: Institutions,

@@ -7,6 +7,18 @@ type Institution {
     name: String
 }
 
+type Payee {
+    id: ID
+    name: String
+}
+
+type Split {
+    postDate: String,
+    amount: Float,
+    memo: String,
+    payee: Payee,
+}
+
 type Account {
     id: ID
     accountName: String
@@ -14,6 +26,8 @@ type Account {
     institution: Institution,
     balance(date: String): Float,
     subaccounts: [Account],
+    fullname: String,
+    splits(year: Int, month: Int): [Split]
 }
 
 type Query {

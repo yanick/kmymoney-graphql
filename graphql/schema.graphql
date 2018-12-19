@@ -12,12 +12,20 @@ type Payee {
     name: String
 }
 
+type Transaction {
+    id: ID
+    postDate: String
+    memo: String
+}
+
 type Split {
     postDate: String,
     amount: Float,
     memo: String,
     payee: Payee,
+    transaction: Transaction,
 }
+
 
 type Account {
     id: ID

@@ -13,9 +13,9 @@ export default {
     account: async (parent: any ,{id }: { id: string } ) => Accounts.query().findById(id),
   },
   Account: {
-      splits: async(account: GQLAccount, { year, month } ) => {
-        const min_date = `${year}-${ _.padStart( month, 2, '0' ) }`;
-        const max_date = `${year}-${ _.padStart( month+1, 2, '0' ) }`;
+      splits: async(account: GQLAccount, { year, month }:{ year: number, month: number} ) => {
+        const min_date = `${year}-${ _.padStart( ""+month, 2, '0' ) }`;
+        const max_date = `${year}-${ _.padStart( ""+(month+1), 2, '0' ) }`;
         return Splits.query()
             .where('accountId',account.id)
             .where( 'postDate', '>', min_date )
@@ -25,7 +25,7 @@ export default {
       fullname: async( account: GQLAccount ) => {
           let name = account.accountName;
           while(account.parentId) {
-              account = await Accounts.query().findById(account.parentId);
+              account = (await Accounts.query().findById(account.parentId)) as any;
               name = account.accountName + ' : ' + name;
           }
           return name;
@@ -41,8 +41,8 @@ export default {
             splits = splits.where( 'postDate', '<=', date );
            }
            return splits.where( 'txtype', 'N' )
-                .sum({ balance:  ref('sharesFormatted').castFloat() })
-                .then( ( obj: GQLAccount[] ) => {
+                .sum({ balance:  ref('sharesFormatted').castFloat() } as any)
+                .then( ( obj: any ) => {
                     return obj[0].balance
                 })
        },

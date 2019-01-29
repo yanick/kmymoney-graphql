@@ -19,11 +19,13 @@ type Transaction {
 }
 
 type Split {
+    account: Account
     postDate: String,
     amount: Float,
     memo: String,
     payee: Payee,
     transaction: Transaction,
+    associatedSplits: [Split],
 }
 
 
@@ -35,7 +37,9 @@ type Account {
     balance(date: String): Float,
     subaccounts: [Account],
     fullname: String,
-    splits(year: Int, month: Int): [Split]
+    splits(year: Int, month: Int): [Split],
+    parentId: ID,
+    isStockAccount: String,
 }
 
 type Query {

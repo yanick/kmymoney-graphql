@@ -6,6 +6,10 @@ import { GQLAccount } from '../schemas';
 import Accounts from '../db/accounts';
 import Splits from '../db/splits';
 import Institutions from '../db/institutions';
+import KeyValuePairs from '../db/keyvaluepairs';
+
+const round = (n: number) => _.round( n, 2 );
+const toNum = (n:string): number => { return round((new Number(n) as any).valueOf() as any)  };
 
 export default {
   Query: {
@@ -13,6 +17,17 @@ export default {
     account: async (parent: any ,{id }: { id: string } ) => Accounts.query().findById(id),
   },
   Account: {
+      is_closed: async( { id }: Accounts ) => {
+          return !! await KeyValuePairs.query().findOne({
+            kvpType: 'ACCOUNT',
+            kvpId: id,
+            kvpKey: 'mm-closed',
+            kvpData: 'yes',
+          })
+      },
+      isStockAccount: async( { isStockAccount }: Accounts ) => {
+          return isStockAccount === 'Y';
+      },
       splits: async(account: GQLAccount, { year, month }:{ year: number, month: number} ) => {
         const min_date = `${year}-${ _.padStart( ""+month, 2, '0' ) }`;
         const max_date = `${year}-${ _.padStart( ""+(month+1), 2, '0' ) }`;
@@ -35,18 +50,27 @@ export default {
       },
       institution:  async ( account: GQLAccount ) =>
         Institutions.query().findOne( 'id', account.institutionId ),
-       balance: async( account: Accounts, { date } : { date: String | undefined } ) => {
+       balance: async( account: Accounts, { date } : { date: string | undefined } ) => {
            let splits = Splits.query().where( 'accountId', account.id );
            if( date ) {
             splits = splits.where( 'postDate', '<=', date );
            }
+
+           const price = await account.priceAt(date);
+
            return splits.where( 'txtype', 'N' )
-                .sum({ balance:  ref('sharesFormatted').castFloat() } as any)
-                .then( ( obj: any ) => {
-                    return obj[0].balance
+                .sum({
+                    amount:  ref('sharesFormatted').castFloat()
+                } as any)
+                .then( ( [{ amount }]: any ) => {
+                    return {
+                        amount: round(amount),
+                        value: round(amount * price),
+                        price,
+                    }
                 })
        },
-  }
+  },
 }
 
   // fullname!: string;

@@ -8,7 +8,13 @@ export default class Splits extends Model {
     return 'kmmSplits';
   }
 
-  amount() { return (new Number(this.sharesFormatted)).valueOf() }
+  accountId!: string;
+  splitId!: string;
+  payeeId!: string;
+  transactionId!: string;
+  sharesFormatted!: string;
+  valueFormatted!: string;
+  priceFormatted!: string;
 
   static get relationMappings()  {
       return {

@@ -1,9 +1,10 @@
-import _ from 'lodash';
+const _ = require('lodash');
+
 import { GraphQLServer } from 'graphql-yoga';
 import { Model } from 'objection';
 import Knex  from 'knex';
 
-import resolver from './resolvers/index.ts';
+import resolver from './resolvers/index';
 
 const knex = Knex({
   client: 'sqlite3',

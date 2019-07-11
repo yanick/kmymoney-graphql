@@ -1,0 +1,4 @@
+- from split -> get payee, transaction, other splits
+
+- from transaction -> memo
+

@@ -1,0 +1,16 @@
+tasks:
+    build:
+        deps:
+            - gentypes
+            - typescript
+
+    typescript:
+        cmds: [ 'tsc' ]
+
+    gentypes:
+        cmds:
+            - graphql-schema-typescript generate-ts graphql/schema.graphql --output src/schemas.d.ts
+
+    run:
+        cmds: [ 'node dist/index.js' ]
+

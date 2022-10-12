@@ -20,7 +20,7 @@
     "@types/lodash": "^4.14.119",
     "@types/node": "^10.12.19",
     "apollo": "^2.1.8",
-    "apollo-server": "^2.2.6",
+    "apollo-server": "^2.25.4",
     "core-js": "^2.6.0",
     "graphql": "^14.0.2",
     "graphql-schema-typescript": "^1.2.8",
